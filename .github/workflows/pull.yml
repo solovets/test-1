@@ -18,7 +18,7 @@ jobs:
     - uses: actions/checkout@v4
       with:
         repository: solovets/test-2
-        path: './zlo'
+        path: zlo
         sparse-checkout: |
           test1.txt
           test2.txt
