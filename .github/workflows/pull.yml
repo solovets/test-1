@@ -1,0 +1,21 @@
+name: Pull from test-2 repo
+
+on:
+  schedule:
+    # Every Monday at 12am
+    #- cron:  '0 0 * * 1'
+    # for testing every 5th minute e.g 1:05, 1:10, 1:15...
+    - cron: '1/5 * * * *'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        repository: foo-user/bar-repo
+        path: './zlo'
+        sparse-checkout: |
+          test1.txt
+          test2.txt
+        sparse-checkout-cone-mode: false
