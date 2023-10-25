@@ -22,4 +22,3 @@ jobs:
         sparse-checkout: |
           test1.txt
           test2.txt
-        sparse-checkout-cone-mode: false
