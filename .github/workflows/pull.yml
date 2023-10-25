@@ -11,6 +11,10 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
+    - name: Clone supercharge website repository
+      uses: actions/checkout@v2
+
+    - name: Clone test-2
     - uses: actions/checkout@v4
       with:
         repository: solovets/test-2
