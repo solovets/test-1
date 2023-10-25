@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        repository: https://github.com/solovets/test-2.git
+        repository: solovets/test-2
         path: './zlo'
         sparse-checkout: |
           test1.txt
