@@ -21,7 +21,6 @@ jobs:
         repository: solovets/test-2
         path: zlo
     - name: Update
-      if: env.exiting1 != 'true'
       run: |
         cd zlo
         cp -u *.txt ../
