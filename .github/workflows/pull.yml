@@ -22,3 +22,13 @@ jobs:
         sparse-checkout: |
           test1.txt
           test2.txt
+        sparse-checkout-cone-mode: false
+    - name: Commit files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "Add changes" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@main
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
