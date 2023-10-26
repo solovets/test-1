@@ -1,5 +1,5 @@
 name: Pull from test-2 repo
-
+env:
 on:
   schedule:
     # Every Monday at 12am
@@ -11,7 +11,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-    - name: Clone supercharge website repository
+    - name: Checkout
       uses: actions/checkout@v4
 
     - name: Clone test-2
@@ -19,17 +19,28 @@ jobs:
       with:
         repository: solovets/test-2
         path: zlo
-        sparse-checkout: |
-          test1.txt
-          test2.txt
-        sparse-checkout-cone-mode: false
+    - name: Update
+      if: env.exiting1 != 'true'
+      run: |
+        cd zlo
+        cp -u "*.txt" ../
+        cd ..
+    - name: Check for changes
+      run: |
+        if git diff --quiet; then
+          echo "No changes detected. Exiting."
+          echo "exiting2=true" >> $GITHUB_ENV
+        fi
     - name: Commit files
+      if: env.exiting2 != 'true'
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add --all
+        git add "*.txt"
         git commit -m "Add changes" -a
     - name: Push changes
+      if: env.exiting2 != 'true'
       uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git push
+        fi
