@@ -42,4 +42,3 @@ jobs:
       if: env.exiting2 != 'true'
       run: |
         git push
-        fi
