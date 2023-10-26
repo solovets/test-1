@@ -1,5 +1,6 @@
 name: Pull from test-2 repo
 env:
+  SOURCE_REPO: owner/repo
 on:
   schedule:
     # Every Monday at 12am
