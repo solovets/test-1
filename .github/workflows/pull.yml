@@ -41,7 +41,6 @@ jobs:
         git commit -m "Add changes" -a
     - name: Push changes
       if: env.exiting2 != 'true'
-      uses: ad-m/github-push-action@master
       run: |
         git push
         fi
