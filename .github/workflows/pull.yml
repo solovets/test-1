@@ -33,13 +33,13 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: solovets/test-2
-        path: zlo
+        path: tmp
 
-    # - name: Update
-    #   run: |
-    #     cd zlo
-    #     cp -u *.txt ../
-    #     cd ..
+    - name: Update
+      run: |
+        cd tmp
+        cp -u *.txt ../qqq
+        cd ..
 
     - name: Check for changes
       id: check
@@ -51,7 +51,7 @@ jobs:
           echo "diff=$(git diff --name-only)" >> $GITHUB_OUTPUT
         fi
       
-    - name: Write doem changes
+    - name: Write down changes
       if: env.exiting != 'true'
       run: |
         printf "${{ steps.check.outputs.diff }}" >> changelog/changelog-${{ steps.stamp.outputs.date_stamp }}.txt
@@ -61,7 +61,7 @@ jobs:
       run: |
         git config --local user.email "$USERNAME@$ADDRESS_SUFFIX"
         git config --local user.name "$USERNAME"
-        git add *.txt
+        git add **/*.txt
         git commit -m "Add changes from $THE_SERVER/solovets/test-2" -a
   
     - name: Push changes
