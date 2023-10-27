@@ -1,6 +1,8 @@
 name: Pull from test-2 repo
 env:
-  SOURCE_REPO: owner/repo
+  USERNAME: ${{ github.actor }}
+  ADDRESS_SUFFIX: users.noreply.github.com
+  THE_SERVER: ${{ github.server_url }}
 on:
   schedule:
     # Every Monday at 12am
@@ -15,30 +17,48 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Clone test-2
+    - name: Create date stamp
+      id: stamp
+      run: |
+        echo "date_stamp=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+    - name: Create changelog file
+      run: |
+        mkdir -p changelog
+        cd changelog
+        touch changelog-${{ steps.stamp.outputs.date_stamp }}.txt
+        cd ..
+
+    - name: Clone repo
       uses: actions/checkout@v4
       with:
         repository: solovets/test-2
         path: zlo
-    - name: Update
-      run: |
-        cd zlo
-        cp -u *.txt ../
-        cd ..
+
+    # - name: Update
+    #   run: |
+    #     cd zlo
+    #     cp -u *.txt ../
+    #     cd ..
+
     - name: Check for changes
       run: |
         if git diff --quiet; then
           echo "No changes detected. Exiting."
-          echo "exiting2=true" >> $GITHUB_ENV
+          echo "exiting=true" >> $GITHUB_ENV
+        else
+          printf "lalala" >> changelog/changelog-${{ steps.stamp.outputs.date_stamp }}.txt
         fi
+
     - name: Commit files
-      if: env.exiting2 != 'true'
+      if: env.exiting != 'true'
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+        git config --local user.email "$USERNAME@$ADDRESS_SUFFIX"
+        git config --local user.name "$USERNAME"
         git add *.txt
-        git commit -m "Add changes" -a
+        git commit -m "Add changes from $THE_SERVER/solovets/test-2" -a
+  
     - name: Push changes
-      if: env.exiting2 != 'true'
+      if: env.exiting != 'true'
       run: |
         git push
