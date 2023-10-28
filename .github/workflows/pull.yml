@@ -49,9 +49,9 @@ jobs:
           echo "exiting=true" >> $GITHUB_ENV
         else
           {
-            echo "diff=$(git diff --name-only)<<EOF" >> $GITHUB_OUTPUT
+            echo "diff=$(git diff --name-only)<<EOF"
             echo EOF
-          }
+          } >> $GITHUB_OUTPUT
         fi
       
     - name: Write down changes
