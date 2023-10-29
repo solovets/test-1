@@ -49,8 +49,9 @@ jobs:
           echo "exiting=true" >> $GITHUB_ENV
         else
           {
-            echo "diff=$(git diff --name-only)<<EOF"
-            echo EOF
+            echo "var<<EOF"
+            echo "diff=$(git diff --name-only)"
+            echo "EOF"
           } >> $GITHUB_OUTPUT
         fi
       
