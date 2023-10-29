@@ -38,7 +38,7 @@ jobs:
     - name: Update
       run: |
         cd tmp
-        find . -name \*.txt -exec cp {} ../ \
+        find ./ -name '*.txt' -exec cp -prv '{}' '..'
         # cp -u *.txt ../
         cd ..
 
