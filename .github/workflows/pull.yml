@@ -50,6 +50,7 @@ jobs:
         else
           {
             echo 'CHANGELOG<<EOF'
+            echo '\n\n\n'
             git diff --name-only
             echo 'EOF'
           } >> $GITHUB_ENV
