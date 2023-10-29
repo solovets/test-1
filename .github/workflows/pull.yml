@@ -38,7 +38,8 @@ jobs:
     - name: Update
       run: |
         cd tmp
-        cp -u *.txt ../
+        find . -name \*.txt -exec cp {} ../ \
+        # cp -u *.txt ../
         cd ..
 
     - name: Check for changes in checked out repo
