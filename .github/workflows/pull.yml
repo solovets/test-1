@@ -50,7 +50,7 @@ jobs:
         else
           EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
           diff_string = $($EOF | git diff --name-only | $EOF)
-          echo "$diff_string" >> $GITHUB_OUTPUT
+          echo "diff=$diff_string" >> $GITHUB_OUTPUT
         fi
       
     - name: Write down changes
