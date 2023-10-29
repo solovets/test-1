@@ -49,14 +49,14 @@ jobs:
           echo "exiting=true" >> $GITHUB_ENV
         else
           EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
-          diff_string = $($EOT | git diff --name-only | $EOT)
-          echo "diff=$diff_string" >> $GITHUB_OUTPUT
+          diff_string = $($EOF | git diff --name-only | $EOF)
+          echo "$diff_string" >> $GITHUB_OUTPUT
         fi
       
     - name: Write down changes
       if: env.exiting != 'true'
       run: |
-        printf "${{ steps.check.outputs.diff }}"
+        printf "${{ steps.check.outputs.diff }}" >> changelog/changelog-${{ steps.stamp.outputs.date_stamp }}.txt
 
     - name: Commit files
       if: env.exiting != 'true'
