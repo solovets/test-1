@@ -48,10 +48,10 @@ jobs:
           echo "No changes detected. Exiting."
           echo "exiting=true" >> $GITHUB_ENV
         else
-          ENDOFLINE=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
-          echo "text<<$ENDOFLINE" >> $GITHUB_OUTPUT
-          echo 'diff=$(git diff --name-only)' >> $GITHUB_OUTPUT
-          echo 'EOF' >> $GITHUB_OUTPUT
+          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+          echo "text<<$EOF" >> $GITHUB_OUTPUT
+          echo "diff=$(git diff --name-only)" >> $GITHUB_OUTPUT
+          echo "$EOF" >> $GITHUB_OUTPUT
         fi
       
     - name: Write down changes
