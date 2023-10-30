@@ -36,9 +36,6 @@ jobs:
         path: tmp
 
     - name: Update
-      # cd tmp
-      # cp -u **/*.txt ../
-      # cd ..
       run: |
         cd tmp
         find . -name \*.txt -exec cp {} ../newDir \;
