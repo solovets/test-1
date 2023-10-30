@@ -38,7 +38,7 @@ jobs:
     - name: Update
       run: |
         cd tmp
-        find . -name \*.txt -exec cp {} ../newDir \;
+        find tmp -name \*.txt -exec cp -f {} newDir \;
         cd ..
 
     - name: Check for changes in checked out repo
@@ -66,7 +66,7 @@ jobs:
       run: |
         git config --local user.email "$USERNAME@$ADDRESS_SUFFIX"
         git config --local user.name "$USERNAME"
-        git add **/*.txt
+        git add *.txt
         git commit -m "Add changes from $THE_SERVER/solovets/test-2" -a
   
     - name: Push changes
