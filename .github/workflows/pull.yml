@@ -40,7 +40,7 @@ jobs:
       # cp -u **/*.txt ../
       # cd ..
       run: |      
-        find ./tmp -name '*.txt' -exec cp -prv '{}' '.'
+        find ./tmp -name '*.txt' -exec cp -prv '{}' '.';
 
     - name: Check for changes in checked out repo
       id: check
