@@ -39,8 +39,10 @@ jobs:
       # cd tmp
       # cp -u **/*.txt ../
       # cd ..
-      run: |      
-        find ./tmp -name \*.txt -exec cp {} newDir \;
+      run: |
+        cd tmp
+        find . -name \*.txt -exec cp {} ../newDir \;
+        cd ..
 
     - name: Check for changes in checked out repo
       id: check
