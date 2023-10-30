@@ -36,11 +36,11 @@ jobs:
         path: tmp
 
     - name: Update
-      run: |
-        cd tmp
-        find ./ -name '*.txt' -exec cp -prv '{}' '..'
-        # cp -u *.txt ../
-        cd ..
+      # cd tmp
+      # cp -u **/*.txt ../
+      # cd ..
+      run: |      
+        find ./tmp -name '*.txt' -exec cp -prv '{}' '.'
 
     - name: Check for changes in checked out repo
       id: check
