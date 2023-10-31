@@ -37,9 +37,7 @@ jobs:
 
     - name: Update
       run: |
-        cd tmp
-        find . -name \*.txt -exec cp -f {} ../newDir \;
-        cd ..
+        find ./tmp -name \*.txt -exec cp -f {} ./ \;
 
     - name: Check for changes in checked out repo
       id: check
